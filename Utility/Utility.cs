@@ -5,7 +5,7 @@ using System.Linq;
 
 
 
-namespace Vheos.ModdingCore
+namespace Vheos.Tools.ModdingCore
 {
     static internal class Utility
     {

@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 
 
-namespace Vheos.ModdingCore
+namespace Vheos.Tools.ModdingCore
 {
     static internal class Extensions_Various
     {

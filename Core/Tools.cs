@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 
 
-namespace Vheos.ModdingCore
+namespace Vheos.Tools.ModdingCore
 {
     static public class Tools
     {

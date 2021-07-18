@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using BepInEx.Configuration;
 using HarmonyLib;
-using Vheos.Extensions.Math;
+using Vheos.Tools.Extensions.Math;
 
 
 
-namespace Vheos.ModdingCore
+namespace Vheos.Tools.ModdingCore
 {
     public abstract class AModSetting
     {
