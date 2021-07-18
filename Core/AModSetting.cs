@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BepInEx.Configuration;
 using HarmonyLib;
+using Vheos.Tools.Extensions.General;
 using Vheos.Tools.Extensions.Math;
 
 
@@ -16,7 +17,7 @@ namespace Vheos.Tools.ModdingCore
         public void Format(string displayName)
         {
             Attributes.DispName = "";
-            if (displayName.IsNotEmpty())
+            if (displayName.Any())
             {
                 Attributes.DispName = Attributes.DispName.PadLeft(5 * _indentLevel, ' ');
                 if (_indentLevel > 0)
