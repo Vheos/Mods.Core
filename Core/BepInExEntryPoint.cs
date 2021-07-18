@@ -1,45 +1,35 @@
-﻿/*
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using BepInEx.Configuration;
 using HarmonyLib;
-using Vheos.ModdingCore;
 using BepInEx;
-using Vheos.Extensions.Math;
-using Vheos.Extensions.General;
-using Vheos.Extensions.Collections;
+using System.Reflection;
+using Vheos.Tools.Extensions.General;
+using Vheos.Tools.Extensions.Collections;
+using Vheos.Tools.Utility;
 
 
-
-namespace Vheos.ModdingCore
+namespace Vheos.Tools.ModdingCore
 {
-    public class Main : BaseUnityPlugin
+    abstract public class BepInExEntryPoint : BaseUnityPlugin
     {
-        // Utility
+        // Privates
         private List<Type> _awakeModTypes;
         private List<Type> _delayedModTypes;
         private List<IUpdatable> _updatableMods;
-        private List<AMod> _mods;
-        private bool _finishedDelayedInitialize;
-        private void CategorizeModsByInstantiationTime(Type[] whitelist = null, Type[] blacklist = null)
+        protected List<AMod> _mods;
+        private bool _instantiatedDelayedMods;
+        private void CategorizeModsByInstantiationTime()
         {
-            foreach (var modType in Utility.GetDerivedTypes<AMod>())
-                if (blacklist.IsNullOrEmpty() || modType.IsNotContainedIn(blacklist)
-                && (whitelist.IsNullOrEmpty() || modType.IsContainedIn(whitelist)))
+            foreach (var modType in Utility.GetDerivedTypes<AMod>(CurrentAssembly))
+                if (Blacklist.IsNullOrEmpty() || modType.IsNotContainedIn(Blacklist)
+                && (Whitelist.IsNullOrEmpty() || modType.IsContainedIn(Whitelist)))
                     if (modType.IsAssignableTo<IDelayedInit>())
                         _delayedModTypes.Add(modType);
                     else
                         _awakeModTypes.Add(modType);
-        }
-        private void TryDelayedInitialize()
-        {
-            if (_finishedDelayedInitialize || !IsGameInitialized)
-                return;
-
-            InstantiateMods(_delayedModTypes);
-            _finishedDelayedInitialize = true;
         }
         private void InstantiateMods(ICollection<Type> modTypes)
         {
@@ -51,14 +41,42 @@ namespace Vheos.ModdingCore
                     _updatableMods.Add(newMod as IUpdatable);
             }
         }
+        private void TryInstantiateDelayedMods()
+        {
+            if (_instantiatedDelayedMods || !DelayedInitializeCondition)
+                return;
+
+            Tools.Log($"Finished waiting");
+            Tools.Log("");
+
+            DelayedInitialize();
+
+            Tools.Log("Instantiating delayed mods...");
+            InstantiateMods(_delayedModTypes);
+
+            Tools.Log($"Finished DelayedInit");
+            _instantiatedDelayedMods = true;
+        }
         private void UpdateMods(ICollection<IUpdatable> updatableMods)
         {
             foreach (var updatableMod in updatableMods)
                 if (updatableMod.IsEnabled)
                     updatableMod.OnUpdate();
         }
-        private bool IsGameInitialized
+
+        // User logic   
+        abstract public Assembly CurrentAssembly
+        { get; }
+        virtual public void Initialize()
+        { }
+        virtual public void DelayedInitialize()
+        { }
+        virtual public bool DelayedInitializeCondition
         => true;
+        virtual public Type[] Whitelist
+        => null;
+        virtual public Type[] Blacklist
+        => null;
 
         // Mono
 #pragma warning disable IDE0051 // Remove unused private members
@@ -82,6 +100,8 @@ namespace Vheos.ModdingCore
             foreach (var modType in _delayedModTypes)
                 Tools.Log($"\t{modType.Name}");
 
+            Initialize();
+
             Tools.Log("Instantiating awake mods...");
             InstantiateMods(_awakeModTypes);
 
@@ -92,10 +112,9 @@ namespace Vheos.ModdingCore
         }
         private void Update()
         {
-            TryDelayedInitialize();
+            TryInstantiateDelayedMods();
             UpdateMods(_updatableMods);
             Tools.TryRedrawConfigWindow();
         }
     }
 }
-*/
