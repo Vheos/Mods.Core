@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using UnityEngine;
-using BepInEx.Configuration;
-using HarmonyLib;
-using BepInEx;
 using System.Reflection;
 using Vheos.Tools.Extensions.General;
 using Vheos.Tools.Extensions.Collections;
-using Vheos.Tools.Utility;
+using Vheos.Tools.UtilityNS;
+
 
 
 namespace Vheos.Tools.ModdingCore
 {
-    abstract public class BepInExEntryPoint : BaseUnityPlugin
+    abstract public class BepInExEntryPoint : BepInEx.BaseUnityPlugin
     {
         // Privates
         private List<Type> _awakeModTypes;
