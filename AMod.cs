@@ -1,15 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using UnityEngine;
-using BepInEx.Configuration;
-using HarmonyLib;
-using Vheos.Tools.Extensions.Math;
-
-
-
-namespace Vheos.Tools.ModdingCore
+﻿namespace Vheos.Tools.ModdingCore
 {
+    using System;
+    using System.Collections.Generic;
+    using BepInEx.Configuration;
+    using HarmonyLib;
+    using Vheos.Tools.Extensions.General;
+    using Vheos.Tools.Extensions.Math;
     public abstract class AMod
     {
         #region const

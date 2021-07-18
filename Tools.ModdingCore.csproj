@@ -31,14 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Core\AMod.cs" />
-    <Compile Include="Core\AModSetting.cs" />
-    <Compile Include="Core\ConfigurationManagerAttributes.cs" />
-    <Compile Include="Core\BepInExEntryPoint.cs" />
-    <Compile Include="Core\ModSetting.cs" />
-    <Compile Include="Core\Tools.cs" />
-    <Compile Include="Core\Interfaces.cs" />
-    <Compile Include="Utility\InternalUtility.cs" />
+    <Compile Include="AMod.cs" />
+    <Compile Include="AModSetting.cs" />
+    <Compile Include="ConfigurationManagerAttributes.cs" />
+    <Compile Include="BepInExEntryPoint.cs" />
+    <Compile Include="ModSetting.cs" />
+    <Compile Include="Tools.cs" />
+    <Compile Include="Interfaces.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">

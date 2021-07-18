@@ -1,15 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using UnityEngine;
-using BepInEx.Configuration;
-using HarmonyLib;
-using Vheos.Tools.Extensions.Reflection;
-
-
-
-namespace Vheos.Tools.ModdingCore
+﻿namespace Vheos.Tools.ModdingCore
 {
+    using BepInEx.Configuration;
+    using Vheos.Tools.Extensions.Reflection;
     public class ModSetting<T> : AModSetting
     {
         // Publics

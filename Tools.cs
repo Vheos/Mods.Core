@@ -1,17 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using UnityEngine;
-using BepInEx.Configuration;
-using HarmonyLib;
-using BepInEx;
-using BepInEx.Logging;
-using System.Diagnostics;
-
-
-
-namespace Vheos.Tools.ModdingCore
+﻿namespace Vheos.Tools.ModdingCore
 {
+    using System;
+    using BepInEx;
+    using BepInEx.Logging;
+    using BepInEx.Configuration;
     static public class Tools
     {
         // Publics
