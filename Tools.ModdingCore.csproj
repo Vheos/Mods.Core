@@ -33,10 +33,11 @@
   <ItemGroup>
     <Compile Include="AMod.cs" />
     <Compile Include="AModSetting.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="ConfigurationManagerAttributes.cs" />
     <Compile Include="BepInExEntryPoint.cs" />
     <Compile Include="ModSetting.cs" />
-    <Compile Include="Tools.cs" />
+    <Compile Include="ConfigHelper.cs" />
     <Compile Include="Interfaces.cs" />
   </ItemGroup>
   <ItemGroup>

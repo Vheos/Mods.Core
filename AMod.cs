@@ -97,7 +97,7 @@
             }
 
             _previousMainToggle = _mainToggle;
-            Tools.SetDirtyConfigWindow();
+            ConfigHelper.SetDirtyConfigWindow();
         }
         private void OnEnable()
         {
@@ -106,18 +106,18 @@
                 _isInitialized = true;
                 ResetSettingPosition();
 
-                Tools.Log($"\t[{GetType().Name}] Initializing...");
+               Log.Debug($"\t[{GetType().Name}] Initializing...");
                 Initialize();
                 Indent++;
-                Tools.Log($"\t[{GetType().Name}] Formatting...");
+               Log.Debug($"\t[{GetType().Name}] Formatting...");
                 SetFormatting();
                 Indent--;
             }
 
-            Tools.Log($"\t[{GetType().Name}] Patching...");
+           Log.Debug($"\t[{GetType().Name}] Patching...");
             _patcher.PatchAll(GetType());
 
-            Tools.Log($"\t[{GetType().Name}] Calling events...");
+           Log.Debug($"\t[{GetType().Name}] Calling events...");
             foreach (var onEnabled in _onEnabledEvents)
                 onEnabled.Invoke();
             foreach (var setting in _settings)
@@ -179,7 +179,7 @@
 
             ResetSettingPosition(-1);
             CreateMainToggle();
-            Tools.Log($"\t[{GetType().Name}] Main toggle: {_mainToggle.Value}");
+           Log.Debug($"\t[{GetType().Name}] Main toggle: {_mainToggle.Value}");
 
             if (IsEnabled)
                 OnEnable();
@@ -255,7 +255,7 @@
         protected void AddEventOnConfigOpened(Action action)
         {
             _onConfigClosedEvents.Add(action);
-            Tools.AddEventOnConfigOpened(() =>
+            ConfigHelper.AddEventOnConfigOpened(() =>
             {
                 if (IsEnabled)
                     action();
@@ -264,7 +264,7 @@
         protected void AddEventOnConfigClosed(Action action)
         {
             _onConfigClosedEvents.Add(action);
-            Tools.AddEventOnConfigClosed(() =>
+            ConfigHelper.AddEventOnConfigClosed(() =>
             {
                 if (IsEnabled)
                     action();

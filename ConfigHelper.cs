@@ -2,13 +2,10 @@
 {
     using System;
     using BepInEx;
-    using BepInEx.Logging;
     using BepInEx.Configuration;
-    static public class Tools
+    static public class ConfigHelper
     {
         // Publics
-        static public void Log(object text)
-        => _logger.Log(LogLevel.Debug, text);
         static public ConfigFile ConfigFile
         { get; private set; }
         static public void SetDirtyConfigWindow()
@@ -46,7 +43,6 @@
         => _unlockSettingLimits;
 
         // Privates
-        static private ManualLogSource _logger;
         static private ConfigurationManager.ConfigurationManager _configManager;
         static private bool _isConfigWindowDirty;
         static private ModSetting<bool> _unlockSettingLimits;
@@ -63,9 +59,8 @@
         }
 
         // Initializers
-        static public void Initialize(BaseUnityPlugin pluginComponent, ManualLogSource logger)
+        static public void Initialize(BaseUnityPlugin pluginComponent)
         {
-            _logger = logger;
             ConfigFile = pluginComponent.Config;
             _configManager = pluginComponent.GetComponent<ConfigurationManager.ConfigurationManager>();
             CreateUnlockLimitsSetting();

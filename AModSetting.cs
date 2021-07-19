@@ -53,7 +53,7 @@
         }
         public void UpdateVisibility()
         {
-            Tools.SetDirtyConfigWindow();
+            ConfigHelper.SetDirtyConfigWindow();
 
             foreach (var controller in _visibilityControllers)
                 if (!controller.IsVisible)

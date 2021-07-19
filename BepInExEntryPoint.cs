@@ -39,15 +39,15 @@
             if (_instantiatedDelayedMods || !DelayedInitializeCondition)
                 return;
 
-            Tools.Log($"Finished waiting");
-            Tools.Log("");
+            Log.Debug($"Finished waiting");
+            Log.Debug("");
 
             DelayedInitialize();
 
-            Tools.Log("Instantiating delayed mods...");
+            Log.Debug("Instantiating delayed mods...");
             InstantiateMods(_delayedModTypes);
 
-            Tools.Log($"Finished DelayedInit");
+            Log.Debug($"Finished DelayedInit");
             _instantiatedDelayedMods = true;
         }
         private void UpdateMods(ICollection<IUpdatable> updatableMods)
@@ -80,34 +80,38 @@
             _updatableMods = new List<IUpdatable>();
             _mods = new List<AMod>();
 
-            Tools.Initialize(this, Logger);
+            Logger.LogDebug("Initializing Log...");
+            Log.Initialize(Logger);
 
-            Tools.Log("Categorizing mods by instantiation time...");
+            Log.Debug("Initializing ConfigHelper...");
+            ConfigHelper.Initialize(this);
+
+            Log.Debug("Categorizing mods by instantiation time...");
             CategorizeModsByInstantiationTime();
 
-            Tools.Log("Awake:");
+            Log.Debug("Awake:");
             foreach (var modType in _awakeModTypes)
-                Tools.Log($"\t{modType.Name}");
+                Log.Debug($"\t{modType.Name}");
 
-            Tools.Log("Delayed:");
+            Log.Debug("Delayed:");
             foreach (var modType in _delayedModTypes)
-                Tools.Log($"\t{modType.Name}");
+                Log.Debug($"\t{modType.Name}");
 
             Initialize();
 
-            Tools.Log("Instantiating awake mods...");
+            Log.Debug("Instantiating awake mods...");
             InstantiateMods(_awakeModTypes);
 
-            Tools.Log($"Finished AwakeInit");
-            Tools.Log("");
+            Log.Debug($"Finished AwakeInit");
+            Log.Debug("");
 
-            Tools.Log($"Waiting for game initialization...");
+            Log.Debug($"Waiting for game initialization...");
         }
         private void Update()
         {
             TryInstantiateDelayedMods();
             UpdateMods(_updatableMods);
-            Tools.TryRedrawConfigWindow();
+            ConfigHelper.TryRedrawConfigWindow();
         }
     }
 }
