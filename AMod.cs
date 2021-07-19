@@ -33,15 +33,10 @@
         private string SectionName
         => GetType().Name;
         private int ModOrderingOffset
-        {
-            get
-            {
-                int index = Array.IndexOf(_modsOrderingList, GetType());
-                if (index < 0)
-                    return int.MaxValue;
-                return index.Add(1).Mul(MAX_SETTINGS_PER_MOD);
-            }
-        }
+        => _modsOrderingList != null && GetType().IsContainedIn(_modsOrderingList)
+         ? Array.IndexOf(_modsOrderingList, GetType())
+         : 0
+           .Add(1).Mul(MAX_SETTINGS_PER_MOD);
         virtual protected string SectionOverride
         => "";
         virtual protected string Description
@@ -106,18 +101,18 @@
                 _isInitialized = true;
                 ResetSettingPosition();
 
-               Log.Debug($"\t[{GetType().Name}] Initializing...");
+                Log.Debug($"\t[{GetType().Name}] Initializing...");
                 Initialize();
                 Indent++;
-               Log.Debug($"\t[{GetType().Name}] Formatting...");
+                Log.Debug($"\t[{GetType().Name}] Formatting...");
                 SetFormatting();
                 Indent--;
             }
 
-           Log.Debug($"\t[{GetType().Name}] Patching...");
+            Log.Debug($"\t[{GetType().Name}] Patching...");
             _patcher.PatchAll(GetType());
 
-           Log.Debug($"\t[{GetType().Name}] Calling events...");
+            Log.Debug($"\t[{GetType().Name}] Calling events...");
             foreach (var onEnabled in _onEnabledEvents)
                 onEnabled.Invoke();
             foreach (var setting in _settings)
@@ -179,7 +174,7 @@
 
             ResetSettingPosition(-1);
             CreateMainToggle();
-           Log.Debug($"\t[{GetType().Name}] Main toggle: {_mainToggle.Value}");
+            Log.Debug($"\t[{GetType().Name}] Main toggle: {_mainToggle.Value}");
 
             if (IsEnabled)
                 OnEnable();
