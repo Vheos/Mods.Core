@@ -3,11 +3,31 @@
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using Vheos.Tools.UtilityNS;
-    using Vheos.Tools.Extensions.General;
-    using Vheos.Tools.Extensions.Collections;
+    using UtilityNS;
+    using Extensions.General;
+    using Extensions.Collections;
     abstract public class BepInExEntryPoint : BepInEx.BaseUnityPlugin
     {
+        // Publics
+        static public BepInExEntryPoint Instance
+        { get; private set; }
+
+        // User logic   
+        abstract public Assembly CurrentAssembly
+        { get; }
+        virtual public void Initialize()
+        { }
+        virtual public void DelayedInitialize()
+        { }
+        virtual public bool DelayedInitializeCondition
+        => true;
+        virtual public Type[] Whitelist
+        => null;
+        virtual public Type[] Blacklist
+        => null;
+        virtual public Type[] ModsOrderingList
+        => null;
+
         // Privates
         private List<Type> _awakeModTypes;
         private List<Type> _delayedModTypes;
@@ -57,28 +77,16 @@
                     updatableMod.OnUpdate();
         }
 
-        // User logic   
-        abstract public Assembly CurrentAssembly
-        { get; }
-        virtual public void Initialize()
-        { }
-        virtual public void DelayedInitialize()
-        { }
-        virtual public bool DelayedInitializeCondition
-        => true;
-        virtual public Type[] Whitelist
-        => null;
-        virtual public Type[] Blacklist
-        => null;
-
         // Mono
 #pragma warning disable IDE0051 // Remove unused private members
         private void Awake()
         {
+            Instance = this;
             _awakeModTypes = new List<Type>();
             _delayedModTypes = new List<Type>();
             _updatableMods = new List<IUpdatable>();
             _mods = new List<AMod>();
+            AMod.SetOrderingList(ModsOrderingList);
 
             Logger.LogDebug("Initializing Log...");
             Log.Initialize(Logger);
