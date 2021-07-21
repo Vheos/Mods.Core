@@ -1,7 +1,7 @@
 ﻿namespace Vheos.Tools.ModdingCore
 {
     using BepInEx.Configuration;
-    using Vheos.Tools.Extensions.Reflection;
+    using Extensions.Reflection;
     public class ModSetting<T> : AModSetting
     {
         // Publics

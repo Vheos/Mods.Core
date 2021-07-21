@@ -4,8 +4,8 @@
     using System.Linq;
     using System.Collections.Generic;
     using BepInEx.Configuration;
-    using Vheos.Tools.Extensions.General;
-    using Vheos.Tools.Extensions.Math;
+    using Extensions.General;
+    using Extensions.Math;
     public abstract class AModSetting
     {
         // Publics 
