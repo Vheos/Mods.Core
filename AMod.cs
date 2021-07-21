@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using BepInEx.Configuration;
     using HarmonyLib;
-    using Vheos.Tools.Extensions.General;
-    using Vheos.Tools.Extensions.Math;
+    using Extensions.General;
+    using Extensions.Math;
     public abstract class AMod
     {
         #region const
@@ -34,9 +34,8 @@
         => GetType().Name;
         private int ModOrderingOffset
         => _modsOrderingList != null && GetType().IsContainedIn(_modsOrderingList)
-         ? Array.IndexOf(_modsOrderingList, GetType())
-         : 0
-           .Add(1).Mul(MAX_SETTINGS_PER_MOD);
+         ? Array.IndexOf(_modsOrderingList, GetType()).Add(1).Mul(MAX_SETTINGS_PER_MOD)
+         : 0;           
         virtual protected string SectionOverride
         => "";
         virtual protected string Description
