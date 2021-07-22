@@ -89,6 +89,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Snippets\indent.snippet" />
     <None Include="Snippets\log.snippet" />
     <None Include="Snippets\postfix.snippet" />
     <None Include="Snippets\prefix.snippet" />
