@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using UtilityNS;
+    using UtilityN;
     using Extensions.General;
     using Extensions.Collections;
     abstract public class BepInExEntryPoint : BepInEx.BaseUnityPlugin
