@@ -7,8 +7,8 @@
     <ProjectGuid>{A48747D8-E698-4C2C-BF11-0EFED7D79EF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tools.ModdingCore</RootNamespace>
-    <AssemblyName>Tools.ModdingCore</AssemblyName>
+    <RootNamespace>Vheos.Tools.ModdingCore</RootNamespace>
+    <AssemblyName>Vheos.Tools.ModdingCore</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -81,14 +81,14 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Extensions\Tools.Extensions.csproj">
+    <ProjectReference Include="..\Extensions\Vheos.Tools.Extensions.csproj">
       <Project>{4afe5e8c-29c0-4389-aaa0-55584146becf}</Project>
-      <Name>Tools.Extensions</Name>
+      <Name>Vheos.Tools.Extensions</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Utility\Tools.Utility.csproj">
+    <ProjectReference Include="..\Utility\Vheos.Tools.Utility.csproj">
       <Project>{96d2cdb1-5ee9-4666-812d-9ecb8df005c4}</Project>
-      <Name>Tools.Utility</Name>
+      <Name>Vheos.Tools.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
