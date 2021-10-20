@@ -25,19 +25,10 @@
     <Prefer32Bit>false</Prefer32Bit>
     <DocumentationFile>bin\Debug\Vheos.Tools.ModdingCore.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_UNITY|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_UNITY|AnyCPU'">
     <OutputPath>bin\Release_UNITY\</OutputPath>
     <DefineConstants>TRACE;UNITY</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
     <DocumentationFile>bin\Release_UNITY\Vheos.Tools.ModdingCore.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_UNITY_NET35|AnyCPU'">
-    <OutputPath>bin\Release_UNITY_NET35\</OutputPath>
-    <DefineConstants>TRACE;UNITY, NET35</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,7 +36,28 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Release_UNITY_NET35\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_UNITY_2018|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release_UNITY_2018\</OutputPath>
+    <DefineConstants>TRACE;UNITY, UNITY2018</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Release_UNITY_2018\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_UNITY_2018_NET35|AnyCPU' ">
+    <OutputPath>bin\Release_UNITY_2018_NET35\</OutputPath>
+    <DefineConstants>TRACE;UNITY, UNITY2018, NET35</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Release_UNITY_2018_NET35\Vheos.Tools.ModdingCore.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AMod.cs" />
@@ -71,12 +83,20 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\Libraries\UnityEngine (2018.4.36f1)\UnityEngine.dll</HintPath>
+    <Reference Include="2018.4.36f1_UnityEngine" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2018'))">
+      <HintPath>..\..\Libraries\Unity (2018.4.36f1)\2018.4.36f1_UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\Libraries\UnityEngine (2018.4.36f1)\UnityEngine.CoreModule.dll</HintPath>
+    <Reference Include="2018.4.36f1_UnityEngine.CoreModule" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2018'))">
+      <HintPath>..\..\Libraries\Unity (2018.4.36f1)\2018.4.36f1_UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="2021.1.12f1_UnityEngine" Condition="$(DefineConstants.Contains('UNITY')) AND !$(DefineConstants.Contains('UNITY2018'))">
+      <HintPath>..\..\Libraries\Unity (2021.1.12f1)\2021.1.12f1_UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="2021.1.12f1_UnityEngine.CoreModule" Condition="$(DefineConstants.Contains('UNITY')) AND !$(DefineConstants.Contains('UNITY2018'))">
+      <HintPath>..\..\Libraries\Unity (2021.1.12f1)\2021.1.12f1_UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
