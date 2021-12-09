@@ -9,7 +9,7 @@
     <Snippet>
       
       <Code Language="CSharp">
-        <![CDATA[[HarmonyPatch(typeof($TYPE$), "$METHOD$"), HarmonyPrefix]
+        <![CDATA[[HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$)), HarmonyPrefix]
 static private void $TYPE$_$METHOD$_Pre($TYPE$ __instance)
 {
     $end$

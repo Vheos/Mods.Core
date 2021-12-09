@@ -9,46 +9,43 @@
     <Snippet>
       
       <Code Language="CSharp">
-        <![CDATA[[HarmonyPatch(typeof($CLASS$), "$METHOD$"), HarmonyPrefix]
-static private bool $CLASS$_$METHOD$_Pre($CLASS$ __instance, ref $TYPE$[] __state, ref $TYPE$ ___$VAR$)
+        <![CDATA[[HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$)), HarmonyPrefix]
+static private bool $CLASS$_$METHOD$_Pre($TYPE$ __instance, ref $STATE_TYPE$ __state, ref $STATE_TYPE$ $STATE_VAR$)
 {
     #region cache
-    __state = new $TYPE$[1];
-    __state[0] = ___$VAR$;
+    __state = $STATE_VAR$;
     #endregion
-            
-    // Modify
-    ___$VAR$ = $end$;
+
+    $STATE_VAR$ = $end$;
             
     return true;
 }
         
-[HarmonyPatch(typeof($CLASS$), "$METHOD$"), HarmonyPostfix]
-static private void $CLASS$_$METHOD$_Post($CLASS$ __instance, ref $TYPE$[] __state, ref $TYPE$ ___$VAR$)
+[HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$)), HarmonyPostfix]
+static private void $CLASS$_$METHOD$_Post($TYPE$ __instance, ref $STATE_TYPE$ __state, ref $STATE_TYPE$ $STATE_VAR$)
 {
     #region restore
-    ___$VAR$ = __state[0];
+    $STATE_VAR$ = __state;
     #endregion
 }]]>
       </Code>
             
       <Declarations>
-        
         <Literal>
-          <ID>CLASS</ID>
-          <Default>CLASS</Default>
+          <ID>TYPE</ID>
+          <Default>TYPE</Default>
         </Literal>
         <Literal>
           <ID>METHOD</ID>
           <Default>METHOD</Default>
         </Literal>
         <Literal>
-          <ID>TYPE</ID>
-          <Default>TYPE</Default>
+          <ID>STATE_TYPE</ID>
+          <Default>STATE_TYPE</Default>
         </Literal>
         <Literal>
-          <ID>VAR</ID>
-          <Default>VAR</Default>
+          <ID>STATE_VAR</ID>
+          <Default>STATE_VAR</Default>
         </Literal>
         
       </Declarations>
