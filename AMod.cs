@@ -126,7 +126,9 @@
             foreach (var onDisabled in _onDisabledEvents)
                 onDisabled.Invoke();
 
+            Log.Debug($"\t[{GetType().Name}] Unpatching...");
             _patcher.UnpatchSelf();
+
             if (!IsCollapsed)
                 OnCollapse();
             else
