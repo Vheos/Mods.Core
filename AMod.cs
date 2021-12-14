@@ -6,21 +6,43 @@
     using HarmonyLib;
     using Extensions.General;
     using Extensions.Math;
+
     public abstract class AMod
     {
-        #region const
+        // Constants
         private const int MAX_SETTINGS_PER_MOD = 1000;
-        #endregion
-        #region enum
-        [Flags]
-        protected enum Toggles
+
+        // User input
+        abstract protected void Initialize();
+        abstract protected void SetFormatting();
+        virtual protected internal void LoadPreset(string presetName)
+        { }
+        virtual protected string SectionOverride
+        => "";
+        virtual protected string Description
+        => "";
+        virtual protected string ModName
+        => null;
+
+
+        // Privates (static)
+        static private readonly CustomDisposable _indentDisposable = new CustomDisposable(() => IndentLevel--);
+        static private Type[] _modsOrderingList;
+        static private int _nextPosition;
+        static protected IDisposable Indent
         {
-            None = 0,
-            Apply = 1 << 1,
-            Collapse = 1 << 2,
-            Hide = 1 << 3,
+            get
+            {
+                IndentLevel++;
+                return _indentDisposable;
+            }
         }
-        #endregion
+        static internal int IndentLevel
+        { get; private set; }
+        static internal void SetOrderingList(params Type[] modTypes)
+        => _modsOrderingList = modTypes;
+        static internal int NextPosition
+        => _nextPosition++;
 
         // Privates
         private readonly Harmony _patcher;
@@ -29,28 +51,22 @@
         private readonly List<Action> _onEnabledEvents;
         private readonly List<Action> _onDisabledEvents;
         private bool _isInitialized;
-        static private Type[] _modsOrderingList;
         private string SectionName
         => GetType().Name;
         private int ModOrderingOffset
         => _modsOrderingList != null && GetType().IsContainedIn(_modsOrderingList)
          ? Array.IndexOf(_modsOrderingList, GetType()).Add(1).Mul(MAX_SETTINGS_PER_MOD)
-         : 0;           
-        virtual protected string SectionOverride
-        => "";
-        virtual protected string Description
-        => "";
-        virtual protected string ModName
-        => null;
+         : 0;
 
-        // Toggles
+        // Privates (toggles)
         private ModSetting<Toggles> _mainToggle;
         private Toggles _previousMainToggle;
         private void CreateMainToggle()
         {
+            ResetSettingPosition(-1);
             _mainToggle = new ModSetting<Toggles>(SectionName, nameof(_mainToggle), Toggles.None)
             {
-                SectionOverride = SectionOverride,
+                FormattedSection = SectionOverride,
                 DisplayResetButton = false,
                 Description = Description,
             };
@@ -102,10 +118,11 @@
 
                 Log.Debug($"\t[{GetType().Name}] Initializing...");
                 Initialize();
-                Indent++;
-                Log.Debug($"\t[{GetType().Name}] Formatting...");
-                SetFormatting();
-                Indent--;
+                using (Indent)
+                {
+                    Log.Debug($"\t[{GetType().Name}] Formatting...");
+                    SetFormatting();
+                }
             }
 
             Log.Debug($"\t[{GetType().Name}] Patching...");
@@ -161,8 +178,6 @@
         => _mainToggle.SetSilently(_mainToggle & ~Toggles.Apply);
         private void ResetCollapseSilently()
         => _mainToggle.SetSilently(_mainToggle & ~Toggles.Collapse);
-        private void ResetHideSilently()
-        => _mainToggle.SetSilently(_mainToggle & ~Toggles.Hide);
 
         // Constructors
         protected AMod()
@@ -173,7 +188,7 @@
             _onEnabledEvents = new List<Action>();
             _onDisabledEvents = new List<Action>();
 
-            ResetSettingPosition(-1);
+
             CreateMainToggle();
             Log.Debug($"\t[{GetType().Name}] Main toggle: {_mainToggle.Value}");
 
@@ -184,21 +199,29 @@
             if (IsHidden)
                 OnHide();
         }
-        abstract protected void Initialize();
-        abstract protected void SetFormatting();
-        virtual public void LoadPreset(int preset)
-        { }
 
         // Utility     
         public bool IsEnabled
         {
             get => _mainToggle.Value.HasFlag(Toggles.Apply);
-            protected set
+            private set
             {
                 if (value)
                     _mainToggle.Value |= Toggles.Apply;
                 else
                     _mainToggle.Value &= ~Toggles.Apply;
+            }
+        }
+        public void ResetSettings(bool resetMainToggle = false)
+        {
+            foreach (var setting in _settings)
+                setting.Reset();
+
+            if (resetMainToggle)
+            {
+                IsEnabled = false;
+                IsCollapsed = false;
+                IsHidden = false;
             }
         }
         protected bool IsCollapsed
@@ -229,25 +252,8 @@
             IsEnabled = true;
             IsCollapsed = true;
         }
-        public void ResetSettings(bool resetMainToggle = false)
-        {
-            foreach (var setting in _settings)
-                setting.Reset();
-
-            if (resetMainToggle)
-            {
-                IsEnabled = false;
-                IsCollapsed = false;
-                IsHidden = false;
-            }
-        }
         protected void ResetSettingPosition(int offset = 0)
-        => AModSetting.NextPosition = ModOrderingOffset + offset;
-        protected int Indent
-        {
-            get => AModSetting.Indent;
-            set => AModSetting.Indent = value;
-        }
+        => _nextPosition = ModOrderingOffset + offset;
         protected void AddEventOnConfigOpened(Action action)
         {
             _onConfigClosedEvents.Add(action);
@@ -274,7 +280,7 @@
         {
             ModSetting<T> newSetting = new ModSetting<T>(SectionName, name, defaultValue, acceptableValues)
             {
-                SectionOverride = SectionOverride,
+                FormattedSection = SectionOverride,
                 FormatAsPercent = false,
             };
             _settings.Add(newSetting);
@@ -284,7 +290,16 @@
         => new AcceptableValueRange<int>(from, to);
         protected AcceptableValueRange<float> FloatRange(float from, float to)
         => new AcceptableValueRange<float>(from, to);
-        static public void SetOrderingList(params Type[] modTypes)
-        => _modsOrderingList = modTypes;
+
+
+        // Defines
+        [Flags]
+        private enum Toggles
+        {
+            None = 0,
+            Apply = 1 << 1,
+            Collapse = 1 << 2,
+            Hide = 1 << 3,
+        }
     }
 }

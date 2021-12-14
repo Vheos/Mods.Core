@@ -17,12 +17,12 @@
         }
 
         // Privates
-        private ConfigEntry<T> _configEntry;
+        private readonly ConfigEntry<T> _configEntry;
 
         // Constructors
         public ModSetting(string section, string name, T defaultValue = default, AcceptableValueBase acceptableValues = null) : base()
         {
-            if (acceptableValues != null && ConfigHelper.AreSettingLimitsUnlocked)
+            if (ConfigHelper.AreSettingLimitsUnlocked)
                 acceptableValues = null;
 
             ConfigDescription description = new ConfigDescription("", acceptableValues, new ConfigurationManagerAttributes());

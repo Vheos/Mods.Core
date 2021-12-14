@@ -68,6 +68,8 @@
     <Compile Include="ModSetting.cs" />
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="Interfaces.cs" />
+    <Compile Include="CustomDisposable.cs" />
+    <Compile Include="Presets.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">

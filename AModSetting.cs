@@ -11,19 +11,20 @@
         // Publics 
         public void Format(string displayName)
         {
-            Attributes.DispName = "";
+            Name = displayName;
+            FormattedName = "";
             if (displayName.Any())
             {
-                Attributes.DispName = Attributes.DispName.PadLeft(5 * _indentLevel, ' ');
-                if (_indentLevel > 0)
-                    Attributes.DispName += "• ";
-                Attributes.DispName += displayName;
+                FormattedName = FormattedName.PadLeft(5 * AMod.IndentLevel, ' ');
+                if (AMod.IndentLevel > 0)
+                    FormattedName += "• ";
+                FormattedName += Name;
             }
 
-            Ordering = NextPosition++;
+            Ordering = AMod.NextPosition;
             _visibilityCheck = () => true;
         }
-        public void Format(string displayName, AModSetting controller, Func<bool> check = null)
+        public void Format<T>(string displayName, ModSetting<T> controller, Func<T, bool> check = null)
         {
             Format(displayName);
             AddVisibilityControl(controller, check);
@@ -46,38 +47,22 @@
             if (callNow)
                 action();
         }
-        public void CallAllEvents()
-        {
-            foreach (var action in _events)
-                action();
-        }
-        public void UpdateVisibility()
-        {
-            ConfigHelper.SetDirtyConfigWindow();
-
-            foreach (var controller in _visibilityControllers)
-                if (!controller.IsVisible)
-                {
-                    IsVisible = false;
-                    return;
-                }
-
-            IsVisible = _visibilityCheck();
-        }
         public void Reset()
         => _configEntryBase.BoxedValue = _configEntryBase.DefaultValue;
 
-        // Attributes
+        // Publics (attributes)
         public string Name
+        { get; private set; }
+        public string Key
         => _configEntryBase.Definition.Key;
         public string Section
         => _configEntryBase.Definition.Section;
-        public string SectionOverride
+        public string FormattedSection
         {
             get => Attributes.Category;
             set => Attributes.Category = value;
         }
-        public string NameOverride
+        public string FormattedName
         {
             get => Attributes.DispName;
             set => Attributes.DispName = value;
@@ -117,27 +102,39 @@
             get => (bool)Attributes.ShowRangeAsPercent;
             set => Attributes.ShowRangeAsPercent = value;
         }
-        static public int Indent
-        {
-            get => _indentLevel;
-            set => _indentLevel = value.ClampMin(0);
-        }
-        static public int NextPosition;
 
-        // Privates       
+        // Privates     
+        internal void CallAllEvents()
+        {
+            foreach (var action in _events)
+                action();
+        }
+        internal void UpdateVisibility()
+        {
+            ConfigHelper.SetDirtyConfigWindow();
+
+            foreach (var controller in _visibilityControllers)
+                if (!controller.IsVisible)
+                {
+                    IsVisible = false;
+                    return;
+                }
+
+            IsVisible = _visibilityCheck();
+        }
         protected ConfigEntryBase _configEntryBase;
         protected List<Action> _events;
         private ConfigurationManagerAttributes Attributes
         => _configEntryBase.Description.Tags[0] as ConfigurationManagerAttributes;
-        static private int _indentLevel;
+
         // Visibility control
         private Func<bool> _visibilityCheck;
-        private List<AModSetting> _visibilityControllers;
-        private void AddVisibilityControl(AModSetting controller, Func<bool> check = null)
+        private readonly List<AModSetting> _visibilityControllers;
+        private void AddVisibilityControl<T>(ModSetting<T> controller, Func<T, bool> check = null)
         {
             AddParentVisibilityControllers(controller);
             if (check != null)
-                _visibilityCheck = check;
+                _visibilityCheck = () => check(controller.Value);
 
             foreach (var visibilityController in _visibilityControllers)
                 _configEntryBase.ConfigFile.SettingChanged += (sender, eventArgs) =>
@@ -148,22 +145,21 @@
         }
         private void AddVisibilityControl<T>(ModSetting<T> controller, T value, bool positiveTest = true) where T : struct
         {
-            Func<bool> check;
+            Func<T, bool> check;
             if (value is Enum valueAsEnum && valueAsEnum.HasFlagsAttribute())
             {
                 if (positiveTest)
-                    check = () => (controller.Value as Enum).HasFlag(valueAsEnum);
+                    check = v => (v as Enum).HasFlag(valueAsEnum);
                 else
-                    check = () => !(controller.Value as Enum).HasFlag(valueAsEnum);
+                    check = v => !(v as Enum).HasFlag(valueAsEnum);
             }
             else
             {
                 if (positiveTest)
-                    check = () => controller.Value.Equals(value);
+                    check = v => v.Equals(value);
                 else
-                    check = () => !controller.Value.Equals(value);
+                    check = v => !v.Equals(value);
             }
-
             AddVisibilityControl(controller, check);
         }
         private void AddParentVisibilityControllers(AModSetting controller)

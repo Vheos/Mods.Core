@@ -6,33 +6,32 @@
     using UtilityN;
     using Extensions.General;
     using Extensions.Collections;
+
     abstract public class BepInExEntryPoint : BepInEx.BaseUnityPlugin
     {
-        // Publics
-        static public BepInExEntryPoint Instance
-        { get; private set; }
-
         // User logic   
-        abstract public Assembly CurrentAssembly
+        abstract protected Assembly CurrentAssembly
         { get; }
-        virtual public void Initialize()
+        virtual protected void Initialize()
         { }
-        virtual public void DelayedInitialize()
+        virtual protected void DelayedInitialize()
         { }
-        virtual public bool DelayedInitializeCondition
+        virtual protected bool DelayedInitializeCondition
         => true;
-        virtual public Type[] Whitelist
+        virtual protected Type[] Whitelist
         => null;
-        virtual public Type[] Blacklist
+        virtual protected Type[] Blacklist
         => null;
-        virtual public Type[] ModsOrderingList
+        virtual protected Type[] ModsOrderingList
+        => null;
+        virtual protected string[] PresetNames
         => null;
 
         // Privates
         private List<Type> _awakeModTypes;
         private List<Type> _delayedModTypes;
         private List<IUpdatable> _updatableMods;
-        protected List<AMod> _mods;
+        protected HashSet<AMod> _mods;
         private bool _instantiatedDelayedMods;
         private void CategorizeModsByInstantiationTime()
         {
@@ -60,15 +59,18 @@
                 return;
 
             Log.Debug($"Finished waiting");
-            Log.Debug("");
 
             DelayedInitialize();
 
             Log.Debug("Instantiating delayed mods...");
             InstantiateMods(_delayedModTypes);
 
+            Log.Debug("Initializing presets...");
+            Presets.TryInitialize(PresetNames, _mods);
+
             Log.Debug($"Finished DelayedInit");
             _instantiatedDelayedMods = true;
+
         }
         private void UpdateMods(ICollection<IUpdatable> updatableMods)
         {
@@ -77,15 +79,14 @@
                     updatableMod.OnUpdate();
         }
 
-        // Mono
+        // Play
 #pragma warning disable IDE0051 // Remove unused private members
         private void Awake()
         {
-            Instance = this;
             _awakeModTypes = new List<Type>();
             _delayedModTypes = new List<Type>();
             _updatableMods = new List<IUpdatable>();
-            _mods = new List<AMod>();
+            _mods = new HashSet<AMod>();
             AMod.SetOrderingList(ModsOrderingList);
 
             Logger.LogDebug("Initializing Log...");
@@ -111,8 +112,6 @@
             InstantiateMods(_awakeModTypes);
 
             Log.Debug($"Finished AwakeInit");
-            Log.Debug("");
-
             Log.Debug($"Waiting for game initialization...");
         }
         private void Update()
