@@ -24,7 +24,6 @@
         virtual protected string ModName
         => null;
 
-
         // Privates (static)
         static private readonly CustomDisposable _indentDisposable = new CustomDisposable(() => IndentLevel--);
         static private Type[] _modsOrderingList;
@@ -281,9 +280,17 @@
             ModSetting<T> newSetting = new ModSetting<T>(SectionName, name, defaultValue, acceptableValues)
             {
                 FormattedSection = SectionOverride,
-                FormatAsPercent = false,
+                FormatAsPercent01 = false,
             };
             _settings.Add(newSetting);
+            return newSetting;
+        }
+        protected ModSetting<bool> CreateHeader(string displayName)
+        {
+            var newSetting = CreateSetting("_header" + _nextPosition, false);
+            newSetting.Format(displayName);
+            newSetting.DisplayResetButton = false;
+            newSetting.CustomDrawer = t => { };
             return newSetting;
         }
         protected AcceptableValueRange<int> IntRange(int from, int to)
