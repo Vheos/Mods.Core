@@ -10,6 +10,8 @@
             get => _configEntry.Value;
             set => _configEntry.Value = value;
         }
+        public T DefaultValue
+        => (T)_configEntry.DefaultValue;
         public void SetSilently(T value)
         {
             _configEntry.SetField("_typedValue", value);
