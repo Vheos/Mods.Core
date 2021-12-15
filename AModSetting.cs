@@ -97,10 +97,20 @@
             get => (bool)Attributes.HideSettingName;
             set => Attributes.HideSettingName = value;
         }
-        public bool FormatAsPercent
+        public bool FormatAsPercent01
         {
             get => (bool)Attributes.ShowRangeAsPercent;
             set => Attributes.ShowRangeAsPercent = value;
+        }
+        public bool ReadOnly
+        {
+            get => (bool)Attributes.ReadOnly;
+            set => Attributes.ReadOnly = value;
+        }
+        public Action<ConfigEntryBase> CustomDrawer
+        {
+            get => Attributes.CustomDrawer;
+            set => Attributes.CustomDrawer = value;
         }
 
         // Privates     
