@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    
+    <Header>
+      <Title>SetterHook</Title>
+      <Shortcut>setter</Shortcut>
+    </Header>
+    <Snippet>
+      
+      <Code Language="CSharp">
+        <![CDATA[[HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$), MethodType.Setter), HarmonyPrefix]
+static private void $TYPE$_$METHOD$_Setter_Pre(ref $VALUE_TYPE$ value)
+{
+    value = $end$;
+}]]>
+      </Code>
+            
+      <Declarations>
+        
+        <Literal>
+          <ID>TYPE</ID>
+          <Default>TYPE</Default>
+        </Literal>
+        <Literal>
+          <ID>METHOD</ID>
+          <Default>METHOD</Default>
+        </Literal>
+        <Literal>
+          <ID>VALUE_TYPE</ID>
+          <Default>VALUE_TYPE</Default>
+        </Literal>
+        
+      </Declarations>
+      
+    </Snippet>
+  </CodeSnippet>
+  
+  
+</CodeSnippets>

@@ -120,6 +120,8 @@
     <None Include="Snippets\indent.snippet" />
     <None Include="Snippets\log.snippet" />
     <None Include="Snippets\postfix.snippet" />
+    <None Include="Snippets\getter.snippet" />
+    <None Include="Snippets\setter.snippet" />
     <None Include="Snippets\prefix.snippet" />
     <None Include="Snippets\prefixsafe.snippet" />
     <None Include="Snippets\tempstate.snippet" />
