@@ -285,10 +285,13 @@
             _settings.Add(newSetting);
             return newSetting;
         }
-        protected ModSetting<bool> CreateHeader(string displayName)
+        protected ModSetting<bool> CreateHeader(string displayName, ModSetting<bool> toggle = null)
         {
             var newSetting = CreateSetting("_header" + _nextPosition, false);
-            newSetting.Format(displayName);
+            if (toggle != null)
+                newSetting.Format(displayName, toggle);
+            else
+                newSetting.Format(displayName);
             newSetting.DisplayResetButton = false;
             newSetting.CustomDrawer = t => { };
             return newSetting;

@@ -36,16 +36,18 @@
         }
         public void Format(string displayName, ModSetting<bool> toggle)
         => Format(displayName, toggle, true);
-        public void AddEvent(Action action, bool callNow = false)
+        public void AddEvent(Action action)
         {
+            AddEventSilently(action);
             _events.Add(action);
+        }
+        public void AddEventSilently(Action action)
+        {
             _configEntryBase.ConfigFile.SettingChanged += (sender, eventArgs) =>
             {
                 if (eventArgs.ChangedSetting == _configEntryBase)
                     action();
             };
-            if (callNow)
-                action();
         }
         public void Reset()
         => _configEntryBase.BoxedValue = _configEntryBase.DefaultValue;
