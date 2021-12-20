@@ -69,6 +69,8 @@
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="CustomDisposable.cs" />
+    <Compile Include="PerPlayerSettings.cs" />
+    <Compile Include="KeyCodeCache.cs" />
     <Compile Include="Presets.cs" />
   </ItemGroup>
   <ItemGroup>
