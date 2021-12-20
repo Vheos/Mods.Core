@@ -275,7 +275,7 @@
         => _onEnabledEvents.Add(action);
         protected void AddEventOnDisabled(Action action)
         => _onDisabledEvents.Add(action);
-        protected ModSetting<T> CreateSetting<T>(string name, T defaultValue = default, AcceptableValueBase acceptableValues = null)
+        internal protected ModSetting<T> CreateSetting<T>(string name, T defaultValue = default, AcceptableValueBase acceptableValues = null)
         {
             ModSetting<T> newSetting = new ModSetting<T>(SectionName, name, defaultValue, acceptableValues)
             {
@@ -300,7 +300,6 @@
         => new AcceptableValueRange<int>(from, to);
         protected AcceptableValueRange<float> FloatRange(float from, float to)
         => new AcceptableValueRange<float>(from, to);
-
 
         // Defines
         [Flags]
