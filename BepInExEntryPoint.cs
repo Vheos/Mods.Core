@@ -65,7 +65,7 @@
             Log.Debug("Instantiating delayed mods...");
             InstantiateMods(_delayedModTypes);
 
-            Log.Debug("Initializing presets...");
+            Log.Debug($"Initializing {nameof(Presets)}...");
             Presets.TryInitialize(PresetNames, _mods);
 
             Log.Debug($"Finished DelayedInit");
@@ -89,11 +89,16 @@
             _mods = new HashSet<AMod>();
             AMod.SetOrderingList(ModsOrderingList);
 
-            Logger.LogDebug("Initializing Log...");
+            Logger.LogDebug($"Initializing {nameof(Log)}...");
             Log.Initialize(Logger);
 
-            Log.Debug("Initializing ConfigHelper...");
+            Log.Debug($"Initializing {nameof(ConfigHelper)}...");
             ConfigHelper.Initialize(this);
+
+            Log.Debug($"Initializing {nameof(KeyCodeCache)}...");
+            KeyCodeCache.Initialize();
+
+            Initialize();
 
             Log.Debug("Categorizing mods by instantiation time...");
             CategorizeModsByInstantiationTime();
@@ -105,8 +110,6 @@
             Log.Debug("Delayed:");
             foreach (var modType in _delayedModTypes)
                 Log.Debug($"\t{modType.Name}");
-
-            Initialize();
 
             Log.Debug("Instantiating awake mods...");
             InstantiateMods(_awakeModTypes);
