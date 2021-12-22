@@ -14,21 +14,22 @@
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '-|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>bin\-\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Debug\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+    <DocumentationFile>bin\-\Vheos.Tools.ModdingCore.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_UNITY|AnyCPU'">
-    <OutputPath>bin\Release_UNITY\</OutputPath>
-    <DefineConstants>TRACE;UNITY</DefineConstants>
-    <DocumentationFile>bin\Release_UNITY\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'RELEASE_UNITY|AnyCPU' ">
+    <OutputPath>bin\UNITY\</OutputPath>
+    <DefineConstants>TRACE;RELEASE, UNITY</DefineConstants>
+    <DocumentationFile>bin\UNITY\Vheos.Tools.ModdingCore.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,20 +37,22 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_UNITY_2018|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'RELEASE_UNITY_2018|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release_UNITY_2018\</OutputPath>
-    <DefineConstants>TRACE;UNITY, UNITY2018</DefineConstants>
+    <OutputPath>bin\UNITY_2018\</OutputPath>
+    <DefineConstants>TRACE;RELEASE, UNITY, UNITY2018</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Release_UNITY_2018\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+    <DocumentationFile>bin\UNITY_2018\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_UNITY_2018_NET35|AnyCPU' ">
-    <OutputPath>bin\Release_UNITY_2018_NET35\</OutputPath>
-    <DefineConstants>TRACE;UNITY, UNITY2018, NET35</DefineConstants>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'RELEASE_UNITY_2018_NET35|AnyCPU' ">
+    <OutputPath>bin\UNITY_2018_NET35\</OutputPath>
+    <DefineConstants>TRACE;RELEASE, UNITY, UNITY2018, NET35</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,7 +60,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Release_UNITY_2018_NET35\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+    <DocumentationFile>bin\UNITY_2018_NET35\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AMod.cs" />
@@ -82,8 +86,8 @@
       <HintPath>..\..\Libraries\BepInEx (v5.4.11)\BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ConfigurationManager">
-      <HintPath>..\..\Libraries\ConfigurationManager (v16.3)\ConfigurationManager.dll</HintPath>
+    <Reference Include="ConfigurationManager_publicized">
+      <HintPath>..\..\Libraries\ConfigurationManager (v16.3)\ConfigurationManager_publicized.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
