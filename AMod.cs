@@ -23,6 +23,8 @@
         => "";
         virtual protected string ModName
         => null;
+        virtual protected bool IsAdvanced
+        => false;
 
         // Privates (static)
         static private readonly CustomDisposable _indentDisposable = new CustomDisposable(() => IndentLevel--);
@@ -70,6 +72,7 @@
                 Description = Description,
             };
             _mainToggle.Format(ModName ?? SectionName.SplitCamelCase());
+            _mainToggle.IsAdvanced = IsAdvanced;
             _mainToggle.AddEvent(OnTogglesChanged);
             _previousMainToggle = _mainToggle;
         }
@@ -214,7 +217,8 @@
         public void ResetSettings(bool resetMainToggle = false)
         {
             foreach (var setting in _settings)
-                setting.Reset();
+                if (setting.DisplayResetButton)
+                    setting.Reset();
 
             if (resetMainToggle)
             {
@@ -285,15 +289,19 @@
             _settings.Add(newSetting);
             return newSetting;
         }
-        protected ModSetting<bool> CreateHeader(string displayName, ModSetting<bool> toggle = null)
+
+        protected ModSetting<bool> CreateHeader(string displayName = null, ModSetting<bool> toggle = null)
         {
             var newSetting = CreateSetting("_header" + _nextPosition, false);
-            if (toggle != null)
-                newSetting.Format(displayName, toggle);
-            else
-                newSetting.Format(displayName);
             newSetting.DisplayResetButton = false;
             newSetting.CustomDrawer = t => { };
+
+            if (displayName != null)
+                if (toggle != null)
+                    newSetting.Format(displayName, toggle);
+                else
+                    newSetting.Format(displayName);
+
             return newSetting;
         }
         protected AcceptableValueRange<int> IntRange(int from, int to)
