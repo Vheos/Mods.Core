@@ -28,6 +28,11 @@
             get => _configManager.DisplayingWindow;
             set => _configManager.DisplayingWindow = value;
         }
+        static public bool AdvancedSettings
+        {
+            get => _configManager._showAdvanced.Value;
+            set => _configManager._showAdvanced.Value = value;
+        }
 
         // Privates
         static internal ConfigFile ConfigFile
