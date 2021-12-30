@@ -51,6 +51,8 @@
         }
         public void Reset()
         => _configEntryBase.BoxedValue = _configEntryBase.DefaultValue;
+        public T CastValue<T>()
+        => (T)_configEntryBase.BoxedValue;
 
         // Publics (attributes)
         public string Name
@@ -91,22 +93,22 @@
         }
         public bool DisplayResetButton
         {
-            get => !(bool)Attributes.HideDefaultButton;
+            get => Attributes.HideDefaultButton == null || !(bool)Attributes.HideDefaultButton;
             set => Attributes.HideDefaultButton = !value;
         }
         public bool DrawInPlaceOfName
         {
-            get => (bool)Attributes.HideSettingName;
+            get => Attributes.HideSettingName != null && (bool)Attributes.HideSettingName;
             set => Attributes.HideSettingName = value;
         }
         public bool FormatAsPercent01
         {
-            get => (bool)Attributes.ShowRangeAsPercent;
+            get => Attributes.ShowRangeAsPercent != null && (bool)Attributes.ShowRangeAsPercent;
             set => Attributes.ShowRangeAsPercent = value;
         }
         public bool ReadOnly
         {
-            get => (bool)Attributes.ReadOnly;
+            get => Attributes.ReadOnly != null && (bool)Attributes.ReadOnly;
             set => Attributes.ReadOnly = value;
         }
         public Action<ConfigEntryBase> CustomDrawer
