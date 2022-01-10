@@ -83,7 +83,7 @@
         }
         public bool IsVisible
         {
-            get => (bool)Attributes.Browsable;
+            get => Attributes.Browsable.HasValue && Attributes.Browsable.Value;
             set => Attributes.Browsable = value;
         }
         public bool IsAdvanced
@@ -93,22 +93,22 @@
         }
         public bool DisplayResetButton
         {
-            get => Attributes.HideDefaultButton == null || !(bool)Attributes.HideDefaultButton;
+            get => !(Attributes.HideDefaultButton.HasValue && Attributes.HideDefaultButton.Value);
             set => Attributes.HideDefaultButton = !value;
         }
         public bool DrawInPlaceOfName
         {
-            get => Attributes.HideSettingName != null && (bool)Attributes.HideSettingName;
+            get => Attributes.HideSettingName.HasValue && Attributes.HideSettingName.Value;
             set => Attributes.HideSettingName = value;
         }
         public bool FormatAsPercent01
         {
-            get => Attributes.ShowRangeAsPercent != null && (bool)Attributes.ShowRangeAsPercent;
+            get => Attributes.ShowRangeAsPercent.HasValue && Attributes.ShowRangeAsPercent.Value;
             set => Attributes.ShowRangeAsPercent = value;
         }
         public bool ReadOnly
         {
-            get => Attributes.ReadOnly != null && (bool)Attributes.ReadOnly;
+            get => Attributes.ReadOnly.HasValue && Attributes.ReadOnly.Value;
             set => Attributes.ReadOnly = value;
         }
         public Action<ConfigEntryBase> CustomDrawer
