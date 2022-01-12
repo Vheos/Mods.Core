@@ -1,8 +1,11 @@
-﻿public interface IDelayedInit
-{ }
-
-public interface IUpdatable
+﻿namespace Vheos.Tools.ModdingCore
 {
-    void OnUpdate();
-    bool IsEnabled { get; }
+    public interface IDelayedInit
+    { }
+
+    public interface IUpdatable
+    {
+        void OnUpdate();
+        bool IsEnabled { get; }
+    }
 }
