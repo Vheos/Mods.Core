@@ -16,26 +16,27 @@
         // Privates
         static private string[] _presetNames;
         static private ICollection<AMod> _mods;
-        static private ModSetting<string> _presetToLoad;
+        static public ModSetting<string> Preset
+        { get; private set; }
         static private void CreateLoadPresetSetting()
         {
-            _presetToLoad = new ModSetting<string>("", nameof(_presetToLoad), DEFAULT_PRESET_NAME, new AcceptableValueList<string>(_presetNames));
-            _presetToLoad.Format("Load preset");
-            _presetToLoad.Ordering = 1;
-            _presetToLoad.IsAdvanced = true;
-            _presetToLoad.DisplayResetButton = false;
-            _presetToLoad.AddEvent(LoadPreset);
+            Preset = new ModSetting<string>("", nameof(Preset), DEFAULT_PRESET_NAME, new AcceptableValueList<string>(_presetNames));
+            Preset.Format("Load preset");
+            Preset.Ordering = 2;
+            Preset.IsAdvanced = true;
+            Preset.DisplayResetButton = false;
+            Preset.AddEvent(LoadPreset);
         }
         static private void LoadPreset()
         {
-            Action<AMod> invoke = t => t.LoadPreset(_presetToLoad);
-            if (_presetToLoad == RESET_TO_DEFAULTS_PRESET_NAME)
+            Action<AMod> invoke = t => t.LoadPreset(Preset);
+            if (Preset == RESET_TO_DEFAULTS_PRESET_NAME)
                 invoke = t => t.ResetSettings(true);
 
             foreach (var mod in _mods)
                 invoke(mod);
 
-            _presetToLoad.SetSilently(DEFAULT_PRESET_NAME);
+            Preset.SetSilently(DEFAULT_PRESET_NAME);
         }
 
         // Initializers

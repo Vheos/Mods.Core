@@ -2,6 +2,7 @@
 {
     using BepInEx.Configuration;
     using Extensions.Reflection;
+
     public class ModSetting<T> : AModSetting
     {
         // Publics
@@ -24,7 +25,8 @@
         // Constructors
         public ModSetting(string section, string name, T defaultValue = default, AcceptableValueBase acceptableValues = null) : base()
         {
-            if (ConfigHelper.AreSettingLimitsUnlocked)
+            if (ConfigHelper.UnlockSettingLimits != null
+            && ConfigHelper.UnlockSettingLimits)
                 acceptableValues = null;
 
             ConfigDescription description = new ConfigDescription("", acceptableValues, new ConfigurationManagerAttributes());
