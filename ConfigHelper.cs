@@ -47,22 +47,34 @@
                 _isConfigWindowDirty = false;
             }
         }
-        static internal bool AreSettingLimitsUnlocked
-        => _unlockSettingLimits != null && _unlockSettingLimits.Value;
         static private ConfigurationManager.ConfigurationManager _configManager;
         static private bool _isConfigWindowDirty;
-        static private ModSetting<bool> _unlockSettingLimits;
+        static public ModSetting<bool> UnlockSettingLimits
+        { get; private set; }
+        static public ModSetting<int> NumericalColorRange
+        { get; private set; }
         static private void CreateUnlockLimitsSetting()
         {
-            _unlockSettingLimits = new ModSetting<bool>("", nameof(_unlockSettingLimits), false);
-            _unlockSettingLimits.Format("Unlock settings' limits");
-            _unlockSettingLimits.Description = "Each setting that uses a value slider will use an input box instead.\n" +
-                                               "This allows you to enter ANY value, unlimited by the slider limits.\n" +
-                                               "However, some extreme values on some settings might produce unexpected results or even crash the game.\n" +
-                                               "(requires game restart)";
-            _unlockSettingLimits.Ordering = 0;
-            _unlockSettingLimits.IsAdvanced = true;
-            _unlockSettingLimits.DisplayResetButton = false;
+            UnlockSettingLimits = new ModSetting<bool>("", nameof(UnlockSettingLimits), false);
+            UnlockSettingLimits.Format("Unlock settings' limits");
+            UnlockSettingLimits.Description =
+                "Each setting that uses a value slider will use an input box instead" +
+                "\nThis allows you to enter ANY value, unlimited by the slider limits" +
+                "\nHowever, some extreme values on some settings might produce unexpected results or even crash the game" +
+                "\n(requires game restart to take effect)";
+            UnlockSettingLimits.Ordering = 0;
+            UnlockSettingLimits.IsAdvanced = true;
+            UnlockSettingLimits.DisplayResetButton = false;
+        }
+        static private void CreateNumericalColorEditingSetting()
+        {
+            NumericalColorRange = new ModSetting<int>("", nameof(NumericalColorRange), 0, new AcceptableValueRange<int>(0, 255));
+            NumericalColorRange.Format("Numerical color range");
+            NumericalColorRange.Description =
+                "";
+            NumericalColorRange.Ordering = 1;
+            NumericalColorRange.IsAdvanced = true;
+            NumericalColorRange.DisplayResetButton = false;
         }
 
         // Initializers
@@ -71,6 +83,7 @@
             ConfigFile = pluginComponent.Config;
             _configManager = pluginComponent.GetComponent<ConfigurationManager.ConfigurationManager>();
             CreateUnlockLimitsSetting();
+            CreateNumericalColorEditingSetting();
         }
     }
 }
