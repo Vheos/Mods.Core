@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A48747D8-E698-4C2C-BF11-0EFED7D79EF0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vheos.Mods.Core</RootNamespace>
+    <AssemblyName>Vheos.Mods.Core</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '-|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UNITY|AnyCPU' ">
+    <OutputPath>bin\UNITY\</OutputPath>
+    <DocumentationFile>bin\UNITY\Vheos.Mods.Core.xml</DocumentationFile>
+    <DefineConstants>DEBUG;UNITY</DefineConstants>
+    <LangVersion>9.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UNITY_NET35|AnyCPU' ">
+    <OutputPath>bin\UNITY_NET35\</OutputPath>
+    <DocumentationFile>bin\UNITY_NET35\Vheos.Mods.Core.xml</DocumentationFile>
+    <DefineConstants>DEBUG;UNITY;NET35</DefineConstants>
+    <LangVersion>9.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UNITY_NOMODULES_NET35|AnyCPU' ">
+    <OutputPath>bin\UNITY_NOMODULES_NET35\</OutputPath>
+    <DocumentationFile>bin\UNITY_NOMODULES_NET35\Vheos.Mods.Core.xml</DocumentationFile>
+    <DefineConstants>DEBUG;UNITY;NOMODULES;NET35</DefineConstants>
+    <LangVersion>9.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="UnityEngine" Condition="$(DefineConstants.Contains('UNITY')) AND !$(DefineConstants.Contains('NOMODULES'))">
+      <HintPath>..\..\Libraries\v2021.2.8f1\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule" Condition="$(DefineConstants.Contains('UNITY')) AND !$(DefineConstants.Contains('NOMODULES'))">
+      <HintPath>..\..\Libraries\v2021.2.8f1\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('NOMODULES'))">
+      <HintPath>..\..\Libraries\v2017.1.5f1\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>Private\Libraries\BepInEx.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>Private\Libraries\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ConfigurationManager_publicized">
+      <HintPath>Private\Libraries\ConfigurationManager_publicized.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tools\Extensions\Vheos.Tools.Extensions.csproj">
+      <Project>{4afe5e8c-29c0-4389-aaa0-55584146becf}</Project>
+      <Name>Vheos.Tools.Extensions</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Utility\Vheos.Tools.Utility.csproj">
+      <Project>{96d2cdb1-5ee9-4666-812d-9ecb8df005c4}</Project>
+      <Name>Vheos.Tools.Utility</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Snippets\indent.snippet" />
+    <None Include="Snippets\log.snippet" />
+    <None Include="Snippets\postfix.snippet" />
+    <None Include="Snippets\getter.snippet" />
+    <None Include="Snippets\setter.snippet" />
+    <None Include="Snippets\prefix.snippet" />
+    <None Include="Snippets\prefixsafe.snippet" />
+    <None Include="Snippets\tempstate.snippet" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\AMod.cs" />
+    <Compile Include="Code\AModSetting.cs" />
+    <Compile Include="Code\BepInExEntryPoint.cs" />
+    <Compile Include="Code\ColorSettings.cs" />
+    <Compile Include="Code\ConfigHelper.cs" />
+    <Compile Include="Code\ConfigurationManagerAttributes.cs" />
+    <Compile Include="Code\CustomDisposable.cs" />
+    <Compile Include="Code\Interfaces.cs" />
+    <Compile Include="Code\KeyCodeCache.cs" />
+    <Compile Include="Code\Log.cs" />
+    <Compile Include="Code\ModSetting.cs" />
+    <Compile Include="Code\PerPlayerSettings.cs" />
+    <Compile Include="Code\Presets.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
