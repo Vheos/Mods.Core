@@ -1,11 +1,11 @@
-﻿namespace Vheos.Tools.ModdingCore
+﻿namespace Vheos.Mods.Core
 {
     using System;
     using System.Collections.Generic;
     using BepInEx.Configuration;
     using HarmonyLib;
-    using Extensions.General;
-    using Extensions.Math;
+    using Tools.Extensions.General;
+    using Tools.Extensions.Math;
 
     public abstract class AMod
     {

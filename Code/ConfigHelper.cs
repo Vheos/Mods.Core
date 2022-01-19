@@ -1,4 +1,4 @@
-﻿namespace Vheos.Tools.ModdingCore
+﻿namespace Vheos.Mods.Core
 {
     using System;
     using System.Collections.Generic;

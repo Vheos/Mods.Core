@@ -1,9 +1,9 @@
-﻿namespace Vheos.Tools.ModdingCore
+﻿namespace Vheos.Mods.Core
 {
     using System;
     using System.Collections.Generic;
     using BepInEx.Configuration;
-    using Tools.ModdingCore;
+    using Mods.Core;
     using Tools.UtilityN;
     using Tools.Extensions.Collections;
     using UnityEngine;

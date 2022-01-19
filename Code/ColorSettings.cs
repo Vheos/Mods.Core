@@ -1,4 +1,4 @@
-﻿namespace Vheos.Tools.ModdingCore
+﻿namespace Vheos.Mods.Core
 {
     using UnityEngine;
     using Vheos.Tools.Extensions.Math;

@@ -1,11 +1,11 @@
-﻿namespace Vheos.Tools.ModdingCore
+﻿namespace Vheos.Mods.Core
 {
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using UtilityN;
-    using Extensions.General;
-    using Extensions.Collections;
+    using Tools.UtilityN;
+    using Tools.Extensions.General;
+    using Tools.Extensions.Collections;
 
     abstract public class BepInExEntryPoint : BepInEx.BaseUnityPlugin
     {

@@ -1,4 +1,4 @@
-﻿namespace Vheos.Tools.ModdingCore
+﻿namespace Vheos.Mods.Core
 {
     public interface IDelayedInit
     { }
