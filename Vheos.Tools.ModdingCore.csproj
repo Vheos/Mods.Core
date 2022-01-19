@@ -9,103 +9,100 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Vheos.Tools.ModdingCore</RootNamespace>
     <AssemblyName>Vheos.Tools.ModdingCore</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '-|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'RELEASE_UNITY2021|AnyCPU' ">
+    <DefineConstants>RELEASE;UNITY;UNITY2021</DefineConstants>
+    <OutputPath>bin\UNITY2021\</OutputPath>
+    <DocumentationFile>bin\UNITY2021\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+    <LangVersion>9.0</LangVersion>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'RELEASE_UNITY2018|AnyCPU' ">
+    <DefineConstants>RELEASE;UNITY;UNITY2018</DefineConstants>
+    <OutputPath>bin\UNITY2018\</OutputPath>
+    <DocumentationFile>bin\UNITY2018\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+    <LangVersion>9.0</LangVersion>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'RELEASE_UNITY2018_NET35|AnyCPU' ">
+    <DefineConstants>RELEASE;UNITY;UNITY2018;NET35</DefineConstants>
+    <OutputPath>bin\UNITY2018_NET35\</OutputPath>
+    <DocumentationFile>bin\UNITY2018_NET35\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+    <LangVersion>9.0</LangVersion>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'RELEASE_UNITY5_NET35|AnyCPU' ">
+    <DefineConstants>RELEASE;UNITY;UNITY5;NET35</DefineConstants>
+    <OutputPath>bin\UNITY5_NET35\</OutputPath>
+    <DocumentationFile>bin\UNITY5_NET35\Vheos.Tools.ModdingCore.xml</DocumentationFile>
+    <LangVersion>9.0</LangVersion>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '-|AnyCPU'">
     <OutputPath>bin\-\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\-\Vheos.Tools.ModdingCore.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'RELEASE_UNITY|AnyCPU' ">
-    <OutputPath>bin\UNITY\</OutputPath>
-    <DefineConstants>TRACE;RELEASE, UNITY</DefineConstants>
-    <DocumentationFile>bin\UNITY\Vheos.Tools.ModdingCore.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'RELEASE_UNITY_2018|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\UNITY_2018\</OutputPath>
-    <DefineConstants>TRACE;RELEASE, UNITY, UNITY2018</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\UNITY_2018\Vheos.Tools.ModdingCore.xml</DocumentationFile>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'RELEASE_UNITY_2018_NET35|AnyCPU' ">
-    <OutputPath>bin\UNITY_2018_NET35\</OutputPath>
-    <DefineConstants>TRACE;RELEASE, UNITY, UNITY2018, NET35</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\UNITY_2018_NET35\Vheos.Tools.ModdingCore.xml</DocumentationFile>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AMod.cs" />
-    <Compile Include="AModSetting.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="ConfigurationManagerAttributes.cs" />
-    <Compile Include="BepInExEntryPoint.cs" />
-    <Compile Include="ModSetting.cs" />
-    <Compile Include="ConfigHelper.cs" />
-    <Compile Include="Interfaces.cs" />
-    <Compile Include="CustomDisposable.cs" />
-    <Compile Include="ColorSettings.cs" />
-    <Compile Include="PerPlayerSettings.cs" />
-    <Compile Include="KeyCodeCache.cs" />
-    <Compile Include="Presets.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\Libraries\BepInEx (v5.4.11)\0Harmony.dll</HintPath>
+    <Reference Include="UnityEngine" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2021'))">
+      <HintPath>..\..\Libraries\Unity (2021.1.12f1)\2021.1.12f1_UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.CoreModule" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2021'))">
+      <HintPath>..\..\Libraries\Unity (2021.1.12f1)\2021.1.12f1_UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2021'))">
+      <HintPath>..\..\Libraries\Unity (2021.1.12f1)\2021.1.12f1_UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2021'))">
+      <HintPath>..\..\Libraries\Unity (2021.1.12f1)\2021.1.12f1_UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2018'))">
+      <HintPath>..\..\Libraries\Unity (2018.4.36f1)\2018.4.36f1_UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2018'))">
+      <HintPath>..\..\Libraries\Unity (2018.4.36f1)\2018.4.36f1_UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2018'))">
+      <HintPath>..\..\Libraries\Unity (2018.4.36f1)\2018.4.36f1_UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY5'))">
+      <HintPath>..\..\Libraries\Unity (5.0.3p3)\5.0.3p3_UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
     <Reference Include="BepInEx">
       <HintPath>..\..\Libraries\BepInEx (v5.4.11)\BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\Libraries\BepInEx (v5.4.11)\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="ConfigurationManager_publicized">
       <HintPath>..\..\Libraries\ConfigurationManager (v16.3)\ConfigurationManager_publicized.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="2018.4.36f1_UnityEngine" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2018'))">
-      <HintPath>..\..\Libraries\Unity (2018.4.36f1)\2018.4.36f1_UnityEngine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="2018.4.36f1_UnityEngine.CoreModule" Condition="$(DefineConstants.Contains('UNITY')) AND $(DefineConstants.Contains('UNITY2018'))">
-      <HintPath>..\..\Libraries\Unity (2018.4.36f1)\2018.4.36f1_UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="2021.1.12f1_UnityEngine" Condition="$(DefineConstants.Contains('UNITY')) AND !$(DefineConstants.Contains('UNITY2018'))">
-      <HintPath>..\..\Libraries\Unity (2021.1.12f1)\2021.1.12f1_UnityEngine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="2021.1.12f1_UnityEngine.CoreModule" Condition="$(DefineConstants.Contains('UNITY')) AND !$(DefineConstants.Contains('UNITY2018'))">
-      <HintPath>..\..\Libraries\Unity (2021.1.12f1)\2021.1.12f1_UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -116,11 +113,12 @@
     <ProjectReference Include="..\Extensions\Vheos.Tools.Extensions.csproj">
       <Project>{4afe5e8c-29c0-4389-aaa0-55584146becf}</Project>
       <Name>Vheos.Tools.Extensions</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Utility\Vheos.Tools.Utility.csproj">
       <Project>{96d2cdb1-5ee9-4666-812d-9ecb8df005c4}</Project>
       <Name>Vheos.Tools.Utility</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +130,21 @@
     <None Include="Snippets\prefix.snippet" />
     <None Include="Snippets\prefixsafe.snippet" />
     <None Include="Snippets\tempstate.snippet" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\AMod.cs" />
+    <Compile Include="Code\AModSetting.cs" />
+    <Compile Include="Code\BepInExEntryPoint.cs" />
+    <Compile Include="Code\ColorSettings.cs" />
+    <Compile Include="Code\ConfigHelper.cs" />
+    <Compile Include="Code\ConfigurationManagerAttributes.cs" />
+    <Compile Include="Code\CustomDisposable.cs" />
+    <Compile Include="Code\Interfaces.cs" />
+    <Compile Include="Code\KeyCodeCache.cs" />
+    <Compile Include="Code\Log.cs" />
+    <Compile Include="Code\ModSetting.cs" />
+    <Compile Include="Code\PerPlayerSettings.cs" />
+    <Compile Include="Code\Presets.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
