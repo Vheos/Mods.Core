@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using BepInEx.Configuration;
     using Mods.Core;
-    using Tools.UtilityN;
+    using Tools.Utilities;
     using Tools.Extensions.Collections;
     using UnityEngine;
 
@@ -38,6 +38,10 @@
         }
 
         // Extensions
+        static public bool IsValidKeyCode(this string t)
+        => _keyCodesByName.ContainsKey(t);
+        static public bool IsValidKeyCode(this ModSetting<string> t)
+        => t != null && t.Value.IsValidKeyCode();
         static public KeyCode ToKeyCode(this string t)
         {
             if (_keyCodesByName.TryGet(t, out var keyCode))
@@ -50,6 +54,5 @@
                 return t.Value.ToKeyCode();
             return KeyCode.None;
         }
-
     }
 }
