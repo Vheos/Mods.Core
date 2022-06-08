@@ -9,9 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Vheos.Mods.Core</RootNamespace>
     <AssemblyName>Vheos.Mods.Core</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>10.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '-|AnyCPU'">
@@ -21,28 +25,16 @@
     <OutputPath>bin\UNITY\</OutputPath>
     <DocumentationFile>bin\UNITY\Vheos.Mods.Core.xml</DocumentationFile>
     <DefineConstants>DEBUG;UNITY</DefineConstants>
-    <LangVersion>9.0</LangVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UNITY_NET35|AnyCPU' ">
     <OutputPath>bin\UNITY_NET35\</OutputPath>
     <DocumentationFile>bin\UNITY_NET35\Vheos.Mods.Core.xml</DocumentationFile>
     <DefineConstants>DEBUG;UNITY;NET35</DefineConstants>
-    <LangVersion>9.0</LangVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UNITY_NOMODULES_NET35|AnyCPU' ">
     <OutputPath>bin\UNITY_NOMODULES_NET35\</OutputPath>
     <DocumentationFile>bin\UNITY_NOMODULES_NET35\Vheos.Mods.Core.xml</DocumentationFile>
     <DefineConstants>DEBUG;UNITY;NOMODULES;NET35</DefineConstants>
-    <LangVersion>9.0</LangVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="UnityEngine" Condition="$(DefineConstants.Contains('UNITY')) AND !$(DefineConstants.Contains('NOMODULES'))">
@@ -93,7 +85,6 @@
     <None Include="Snippets\getter.snippet" />
     <None Include="Snippets\setter.snippet" />
     <None Include="Snippets\prefix.snippet" />
-    <None Include="Snippets\prefixsafe.snippet" />
     <None Include="Snippets\tempstate.snippet" />
   </ItemGroup>
   <ItemGroup>
