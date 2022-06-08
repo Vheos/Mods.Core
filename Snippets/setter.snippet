@@ -8,7 +8,7 @@
     <Snippet>
       
       <Code Language="CSharp">
-        <![CDATA[[HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$), MethodType.Setter), HarmonyPrefix]
+        <![CDATA[[HarmonyPrefix, HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$), MethodType.Setter)]
 static private void $TYPE$_$METHOD$_Setter_Pre(ref $VALUE_TYPE$ value)
 {
     value = $end$;

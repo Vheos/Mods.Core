@@ -8,8 +8,8 @@
     <Snippet>
       
       <Code Language="CSharp">
-        <![CDATA[[HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$)), HarmonyPostfix]
-static private void $TYPE$_$METHOD$_Post($TYPE$ __instance, ref bool __result, ref bool __state)
+        <![CDATA[[HarmonyPostfix, HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$))]
+static private void $TYPE$_$METHOD$_Post($TYPE$ __instance)
 {
     $end$
 }]]>

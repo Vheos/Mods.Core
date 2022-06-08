@@ -8,19 +8,17 @@
     <Snippet>
       
       <Code Language="CSharp">
-        <![CDATA[[HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$)), HarmonyPrefix]
-static private bool $TYPE$_$METHOD$_Pre($TYPE$ __instance, ref $STATE_TYPE$ __state, ref $STATE_TYPE$ $STATE_VAR$)
+        <![CDATA[[HarmonyPrefix, HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$))]
+static private void $TYPE$_$METHOD$_Pre($TYPE$ __instance, ref $STATE_TYPE$ __state, ref $STATE_TYPE$ $STATE_VAR$)
 {
     // Cache and set temporary value
     __state = $STATE_VAR$;
     $STATE_VAR$ = $VALUE$;
     
     $end$
-            
-    return true;
 }
         
-[HarmonyPatch(typeof($TYPE$), nameof($TYPE$.$METHOD$)), HarmonyPostfix]
+[HarmonyPatch(HarmonyPostfix, typeof($TYPE$), nameof($TYPE$.$METHOD$))]
 static private void $TYPE$_$METHOD$_Post($TYPE$ __instance, ref $STATE_TYPE$ __state, ref $STATE_TYPE$ $STATE_VAR$)
 {
     // Restore original value
