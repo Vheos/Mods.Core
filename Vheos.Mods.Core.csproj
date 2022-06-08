@@ -67,14 +67,9 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Tools\Extensions\Vheos.Tools.Extensions.csproj">
-      <Project>{4afe5e8c-29c0-4389-aaa0-55584146becf}</Project>
-      <Name>Vheos.Tools.Extensions</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Tools\Utilities\Vheos.Tools.Utilities.csproj">
+    <ProjectReference Include="..\..\Tools\Utilities\Vheos.Helpers.csproj">
       <Project>{96d2cdb1-5ee9-4666-812d-9ecb8df005c4}</Project>
-      <Name>Vheos.Tools.Utilities</Name>
+      <Name>Vheos.Helpers</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
@@ -88,19 +83,19 @@
     <None Include="Snippets\tempstate.snippet" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\AMod.cs" />
-    <Compile Include="Code\AModSetting.cs" />
-    <Compile Include="Code\BepInExEntryPoint.cs" />
-    <Compile Include="Code\ColorSettings.cs" />
-    <Compile Include="Code\ConfigHelper.cs" />
-    <Compile Include="Code\ConfigurationManagerAttributes.cs" />
-    <Compile Include="Code\CustomDisposable.cs" />
-    <Compile Include="Code\Interfaces.cs" />
-    <Compile Include="Code\KeyCodeCache.cs" />
-    <Compile Include="Code\Log.cs" />
-    <Compile Include="Code\ModSetting.cs" />
-    <Compile Include="Code\PerPlayerSettings.cs" />
-    <Compile Include="Code\Presets.cs" />
+    <Compile Include="Code\Core\AMod.cs" />
+    <Compile Include="Code\Extensions.cs" />
+    <Compile Include="Code\Settings\AModSetting.cs" />
+    <Compile Include="Code\Core\BepInExEntryPoint.cs" />
+    <Compile Include="Code\Settings\ColorSettings.cs" />
+    <Compile Include="Code\Core\ConfigHelper.cs" />
+    <Compile Include="Code\Core\ConfigurationManagerAttributes.cs" />
+    <Compile Include="Code\GlobalUsings.cs" />
+    <Compile Include="Code\Core\Interfaces.cs" />
+    <Compile Include="Code\Core\Log.cs" />
+    <Compile Include="Code\Settings\ModSetting.cs" />
+    <Compile Include="Code\Settings\PerPlayerSettings.cs" />
+    <Compile Include="Code\Core\Presets.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
