@@ -24,35 +24,28 @@
         {
             get
             {
-                foreach (var keyCode in _keyCodesByName)
-                    yield return keyCode.Value;
+                foreach (var kvp in _keyCodesByName)
+                    yield return kvp.Value;
             }
         }
         static public IEnumerable<string> AllStrings
         {
             get
             {
-                foreach (var keyCode in _keyCodesByName)
-                    yield return keyCode.Key;
+                foreach (var kvp in _keyCodesByName)
+                    yield return kvp.Key;
             }
         }
 
         // Extensions
         static public bool IsValidKeyCode(this string t)
-        => _keyCodesByName.ContainsKey(t);
-        static public bool IsValidKeyCode(this ModSetting<string> t)
-        => t != null && t.Value.IsValidKeyCode();
+            => _keyCodesByName.ContainsKey(t);
         static public KeyCode ToKeyCode(this string t)
-        {
-            if (_keyCodesByName.TryGet(t, out var keyCode))
-                return keyCode;
-            return KeyCode.None;
-        }
+            => _keyCodesByName.TryGet(t, out var keyCode) ? keyCode : KeyCode.None;
+
+        static public bool IsValidKeyCode(this ModSetting<string> t)
+            => t != null && t.Value.IsValidKeyCode();
         static public KeyCode ToKeyCode(this ModSetting<string> t)
-        {
-            if (t != null)
-                return t.Value.ToKeyCode();
-            return KeyCode.None;
-        }
+            => t != null ? t.Value.ToKeyCode() : KeyCode.None;
     }
 }
