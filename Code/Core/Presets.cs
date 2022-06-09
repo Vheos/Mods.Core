@@ -1,17 +1,17 @@
 ﻿namespace Vheos.Mods.Core;
 
-static public class Presets
+public static class Presets
 {
     // Constants
     private const string DEFAULT_PRESET_NAME = "-";
     private const string RESET_TO_DEFAULTS_PRESET_NAME = "Reset to defaults";
 
     // Privates
-    static private string[] _presetNames;
-    static private ICollection<AMod> _mods;
-    static public ModSetting<string> Preset
+    private static string[] _presetNames;
+    private static ICollection<AMod> _mods;
+    public static ModSetting<string> Preset
     { get; private set; }
-    static private void CreateLoadPresetSetting()
+    private static void CreateLoadPresetSetting()
     {
         Preset = new ModSetting<string>("", nameof(Preset), DEFAULT_PRESET_NAME, new AcceptableValueList<string>(_presetNames));
         Preset.Format("Load preset");
@@ -20,7 +20,7 @@ static public class Presets
         Preset.DisplayResetButton = false;
         Preset.AddEvent(LoadPreset);
     }
-    static private void LoadPreset()
+    private static void LoadPreset()
     {
         Action<AMod> invoke = t => t.LoadPreset(Preset);
         if (Preset == RESET_TO_DEFAULTS_PRESET_NAME)
@@ -33,7 +33,7 @@ static public class Presets
     }
 
     // Initializers
-    static public void TryInitialize(string[] presetNames, ICollection<AMod> mods)
+    public static void TryInitialize(string[] presetNames, ICollection<AMod> mods)
     {
         if (presetNames.IsNullOrEmpty() || mods.IsNullOrEmpty())
             return;

@@ -1,25 +1,24 @@
 ﻿namespace Vheos.Mods.Core;
 using System.Reflection;
-using Vheos.Helpers.KeyCodeCache;
 
-abstract public class BepInExEntryPoint : BepInEx.BaseUnityPlugin
+public abstract class BepInExEntryPoint : BepInEx.BaseUnityPlugin
 {
     // User logic   
-    abstract protected Assembly CurrentAssembly
+    protected abstract Assembly CurrentAssembly
     { get; }
-    virtual protected void Initialize()
+    protected virtual void Initialize()
     { }
-    virtual protected void DelayedInitialize()
+    protected virtual void DelayedInitialize()
     { }
-    virtual protected bool DelayedInitializeCondition
+    protected virtual bool DelayedInitializeCondition
     => true;
-    virtual protected Type[] Whitelist
+    protected virtual Type[] Whitelist
     => null;
-    virtual protected Type[] Blacklist
+    protected virtual Type[] Blacklist
     => null;
-    virtual protected Type[] ModsOrderingList
+    protected virtual Type[] ModsOrderingList
     => null;
-    virtual protected string[] PresetNames
+    protected virtual string[] PresetNames
     => null;
 
     // Privates

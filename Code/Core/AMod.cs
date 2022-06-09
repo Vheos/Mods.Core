@@ -1,4 +1,5 @@
 ﻿namespace Vheos.Mods.Core;
+using Vheos.Helpers.Common;
 
 public abstract class AMod
 {
@@ -6,24 +7,24 @@ public abstract class AMod
     private const int MAX_SETTINGS_PER_MOD = 1000;
 
     // User input
-    abstract protected void Initialize();
-    abstract protected void SetFormatting();
-    virtual protected internal void LoadPreset(string presetName)
+    protected abstract void Initialize();
+    protected abstract void SetFormatting();
+    protected internal virtual void LoadPreset(string presetName)
     { }
-    virtual protected string SectionOverride
+    protected virtual string SectionOverride
     => "";
-    virtual protected string Description
+    protected virtual string Description
     => "";
-    virtual protected string ModName
+    protected virtual string ModName
     => null;
-    virtual protected bool IsAdvanced
+    protected virtual bool IsAdvanced
     => false;
 
     // Privates (static)
-    static private readonly CustomDisposable _indentDisposable = new(() => IndentLevel--);
-    static private Type[] _modsOrderingList;
-    static private int _nextPosition;
-    static protected IDisposable Indent
+    private static readonly CustomDisposable _indentDisposable = new(() => IndentLevel--);
+    private static Type[] _modsOrderingList;
+    private static int _nextPosition;
+    protected static IDisposable Indent
     {
         get
         {
@@ -31,11 +32,11 @@ public abstract class AMod
             return _indentDisposable;
         }
     }
-    static internal int IndentLevel
+    internal static int IndentLevel
     { get; private set; }
-    static internal void SetOrderingList(params Type[] modTypes)
+    internal static void SetOrderingList(params Type[] modTypes)
     => _modsOrderingList = modTypes;
-    static internal int NextPosition
+    internal static int NextPosition
     => _nextPosition++;
 
     // Privates
@@ -270,7 +271,7 @@ public abstract class AMod
     => _onEnabledEvents.Add(action);
     protected void AddEventOnDisabled(Action action)
     => _onDisabledEvents.Add(action);
-    internal protected ModSetting<T> CreateSetting<T>(string name, T defaultValue = default, AcceptableValueBase acceptableValues = null)
+    protected internal ModSetting<T> CreateSetting<T>(string name, T defaultValue = default, AcceptableValueBase acceptableValues = null)
     {
         ModSetting<T> newSetting = new(SectionName, name, defaultValue, acceptableValues)
         {

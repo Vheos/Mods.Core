@@ -1,10 +1,10 @@
 ﻿namespace Vheos.Mods.Core;
 using BepInEx;
 
-static public class ConfigHelper
+public static class ConfigHelper
 {
     // Publics
-    static public void AddEventOnConfigOpened(Action action)
+    public static void AddEventOnConfigOpened(Action action)
     {
         _configManager.DisplayingWindowChanged += (sender, eventArgs) =>
         {
@@ -12,7 +12,7 @@ static public class ConfigHelper
                 action();
         };
     }
-    static public void AddEventOnConfigClosed(Action action)
+    public static void AddEventOnConfigClosed(Action action)
     {
         _configManager.DisplayingWindowChanged += (sender, eventArgs) =>
         {
@@ -20,23 +20,23 @@ static public class ConfigHelper
                 action();
         };
     }
-    static public bool IsConfigOpen
+    public static bool IsConfigOpen
     {
         get => _configManager.DisplayingWindow;
         set => _configManager.DisplayingWindow = value;
     }
-    static public bool AdvancedSettings
+    public static bool AdvancedSettings
     {
         get => _configManager._showAdvanced.Value;
         set => _configManager._showAdvanced.Value = value;
     }
 
     // Privates
-    static internal ConfigFile ConfigFile
+    internal static ConfigFile ConfigFile
     { get; private set; }
-    static internal void SetDirtyConfigWindow()
+    internal static void SetDirtyConfigWindow()
     => _isConfigWindowDirty = true;
-    static internal void TryRedrawConfigWindow()
+    internal static void TryRedrawConfigWindow()
     {
         if (IsConfigOpen && _isConfigWindowDirty)
         {
@@ -44,13 +44,13 @@ static public class ConfigHelper
             _isConfigWindowDirty = false;
         }
     }
-    static private ConfigurationManager.ConfigurationManager _configManager;
-    static private bool _isConfigWindowDirty;
-    static public ModSetting<bool> UnlockSettingLimits
+    private static ConfigurationManager.ConfigurationManager _configManager;
+    private static bool _isConfigWindowDirty;
+    public static ModSetting<bool> UnlockSettingLimits
     { get; private set; }
-    static public ModSetting<int> NumericalColorRange
+    public static ModSetting<int> NumericalColorRange
     { get; private set; }
-    static private void CreateUnlockLimitsSetting()
+    private static void CreateUnlockLimitsSetting()
     {
         UnlockSettingLimits = new ModSetting<bool>("", nameof(UnlockSettingLimits), false);
         UnlockSettingLimits.Format("Unlock settings' limits");
@@ -63,7 +63,7 @@ static public class ConfigHelper
         UnlockSettingLimits.IsAdvanced = true;
         UnlockSettingLimits.DisplayResetButton = false;
     }
-    static private void CreateNumericalColorEditingSetting()
+    private static void CreateNumericalColorEditingSetting()
     {
         NumericalColorRange = new ModSetting<int>("", nameof(NumericalColorRange), 0, new AcceptableValueRange<int>(0, 255));
         NumericalColorRange.Format("Numerical color range");
@@ -75,7 +75,7 @@ static public class ConfigHelper
     }
 
     // Initializers
-    static public void Initialize(BaseUnityPlugin pluginComponent)
+    public static void Initialize(BaseUnityPlugin pluginComponent)
     {
         ConfigFile = pluginComponent.Config;
         _configManager = pluginComponent.GetComponent<ConfigurationManager.ConfigurationManager>();

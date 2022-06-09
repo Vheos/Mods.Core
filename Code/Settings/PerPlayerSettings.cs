@@ -10,7 +10,7 @@ public abstract class PerPlayerSettings<T> where T : AMod
         _playerID = playerID;
         Toggle = mod.CreateSetting(PlayerPrefix + nameof(Toggle), false);
     }
-    virtual public void Format()
+    public virtual void Format()
     {
         Toggle.DisplayResetButton = false;
         Toggle.Format($"Player {_playerID + 1}");

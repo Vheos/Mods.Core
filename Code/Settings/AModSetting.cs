@@ -7,7 +7,7 @@ public abstract class AModSetting
     {
         Name = displayName;
         FormattedName = "";
-        if (displayName.Any())
+        if (displayName.IsNotEmpty())
         {
             FormattedName = FormattedName.PadLeft(5 * AMod.IndentLevel, ' ');
             if (AMod.IndentLevel > 0)

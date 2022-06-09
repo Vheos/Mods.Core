@@ -2,17 +2,17 @@
 using Vheos.Helpers.KeyCodeCache;
 using Vheos.Helpers.RNG;
 
-static public class Extensions
+public static class Extensions
 {
-    static public bool IsValidKeyCode(this ModSetting<string> t)
+    public static bool IsValidKeyCode(this ModSetting<string> t)
         => t != null && t.Value.IsValidKeyCode();
-    static public KeyCode ToKeyCode(this ModSetting<string> t)
+    public static KeyCode ToKeyCode(this ModSetting<string> t)
         => t != null ? t.Value.ToKeyCode() : KeyCode.None;
 
-    static public bool Roll(this ModSetting<float> t)
+    public static bool Roll(this ModSetting<float> t)
         => t.Value.Roll();
-    static public bool RollPercent(this ModSetting<float> t)
+    public static bool RollPercent(this ModSetting<float> t)
         => t.Value.RollPercent();
-    static public bool RollPercent(this ModSetting<int> t)
+    public static bool RollPercent(this ModSetting<int> t)
         => t.Value.RollPercent();
 }
