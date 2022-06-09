@@ -89,9 +89,6 @@ abstract public class BepInExEntryPoint : BepInEx.BaseUnityPlugin
         Log.Debug($"Initializing {nameof(ConfigHelper)}...");
         ConfigHelper.Initialize(this);
 
-        Log.Debug($"Initializing {nameof(KeyCodeCache)}...");
-        KeyCodeCache.Initialize();
-
         Initialize();
 
         Log.Debug("Categorizing mods by instantiation time...");
