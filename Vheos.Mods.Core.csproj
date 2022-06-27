@@ -94,6 +94,7 @@
     <Compile Include="Code\Core\Interfaces.cs" />
     <Compile Include="Code\Core\Log.cs" />
     <Compile Include="Code\Settings\ModSetting.cs" />
+    <Compile Include="Code\Settings\PerValueSettings.cs" />
     <Compile Include="Code\Settings\PerPlayerSettings.cs" />
     <Compile Include="Code\Core\Presets.cs" />
   </ItemGroup>
