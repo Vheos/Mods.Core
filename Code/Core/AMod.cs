@@ -282,7 +282,7 @@ public abstract class AMod
         return newSetting;
     }
 
-    protected ModSetting<bool> CreateHeader(string displayName = null, ModSetting<bool> toggle = null)
+    protected internal ModSetting<bool> CreateHeader(string displayName = null, ModSetting<bool> toggle = null)
     {
         var newSetting = CreateSetting("_header" + _nextPosition, false);
         newSetting.DisplayResetButton = false;
