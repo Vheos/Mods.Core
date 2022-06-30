@@ -25,8 +25,6 @@ public abstract class PerValueSettings<TMod, TValue> where TMod : AMod
         get => Header.Description;
         set => Header.Description = value;
     }
-    public ModSetting<T> CreateSetting<T>(string name, T defaultValue = default, AcceptableValueBase acceptableValues = null)
-    => _mod.CreateSetting(Prefix + name, defaultValue, acceptableValues);
 
     // Publics
     public TValue Value { get; private set; }
