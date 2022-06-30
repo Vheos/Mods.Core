@@ -7,7 +7,7 @@ public abstract class PerValueSettings<TMod, TValue> where TMod : AMod
     public PerValueSettings(TMod mod, TValue value, bool isToggle = false)
     {
         _mod = mod;
-        _value = value;
+        Value = value;
         _isToggle = isToggle;
 
         if (_isToggle)
@@ -16,9 +16,9 @@ public abstract class PerValueSettings<TMod, TValue> where TMod : AMod
     public virtual void Format()
     {
         if (_isToggle)
-            Header.Format(_value.ToString());
+            Header.Format(Value.ToString());
         else
-            Header = _mod.CreateHeader(_value.ToString());        
+            Header = _mod.CreateHeader(Value.ToString());        
     }
     public string Description
     {
@@ -28,10 +28,12 @@ public abstract class PerValueSettings<TMod, TValue> where TMod : AMod
     public ModSetting<T> CreateSetting<T>(string name, T defaultValue = default, AcceptableValueBase acceptableValues = null)
     => _mod.CreateSetting(Prefix + name, defaultValue, acceptableValues);
 
+    // Publics
+    public TValue Value { get; private set; }
+
     // Privates
     protected TMod _mod;
-    protected TValue _value;
     protected bool _isToggle;
     protected string Prefix
-    => $"{GetType().Name}_{_value}_";
+    => $"{GetType().Name}_{Value}_";
 }
