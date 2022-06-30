@@ -13,7 +13,7 @@ public abstract class PerValueSettings<TMod, TValue> where TMod : AMod
         if (_isToggle)
             Header = _mod.CreateSetting(Prefix + nameof(Header), false);
     }
-    public virtual void Format()
+    public void FormatHeader()
     {
         if (_isToggle)
             Header.Format(Value.ToString());
