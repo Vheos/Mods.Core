@@ -13,6 +13,8 @@ public abstract class PerValueSettings<TMod, TValue> where TMod : AMod
         if (_isToggle)
             Header = _mod.CreateSetting(Prefix + nameof(Header), false);
     }
+    public ModSetting<T> CreateSetting<T>(string name, T defaultValue = default, AcceptableValueBase acceptableValues = null)
+        => _mod.CreateSetting(Prefix + name, defaultValue, acceptableValues);
     public void FormatHeader()
     {
         if (_isToggle)
